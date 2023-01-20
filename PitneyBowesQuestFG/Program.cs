@@ -6,6 +6,15 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Serilog
+var logger = new LoggerConfiguration()
+	.WriteTo.Console() // moja twórczosc
+	.ReadFrom.Configuration(builder.Configuration)
+	.Enrich.FromLogContext()
+	.CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+//* Serilog
 builder.Services.AddDbContext<InMemoryDBContext>(options => options.UseInMemoryDatabase("AdressBookDB"));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddControllers();

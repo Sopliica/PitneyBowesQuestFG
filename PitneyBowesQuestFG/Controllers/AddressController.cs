@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PitneyBowesQuestFG.Models;
 using PitneyBowesQuestFG.Repository_Service;
+using Serilog;
+using System.Runtime.CompilerServices;
 
 namespace PitneyBowesQuestFG.Controllers;
 [ApiController]
@@ -8,9 +10,11 @@ namespace PitneyBowesQuestFG.Controllers;
 public class AddressController : ControllerBase
 {
     private readonly IRepository<Address> _addressRepository;
-	public AddressController(IRepository<Address> addressRepository)
+	private readonly ILogger<Repository<Address>> _logger;
+	public AddressController(IRepository<Address> addressRepository, ILogger<Repository<Address>> logger)
 	{
-		_addressRepository = addressRepository;	
+		_addressRepository = addressRepository;
+		_logger = logger;
 	}
 	[HttpGet]
 	public async Task<IActionResult> GetLast()
@@ -18,7 +22,7 @@ public class AddressController : ControllerBase
 		Address result;
 		try 
 		{
-            result = (await _addressRepository.GetAll()).Last();
+            result = (await _addressRepository.GetAll()).Last();			
         }
 		catch(Exception e)
 		{
@@ -26,7 +30,7 @@ public class AddressController : ControllerBase
 		}
 		return Ok(result);
 	}
-	[HttpGet("{city}")]
+	[HttpGet("{city}")]//[HttpGet]
 	public async Task<IActionResult> GetAllByCity(string city)
 	{
 		List<Address> result;
