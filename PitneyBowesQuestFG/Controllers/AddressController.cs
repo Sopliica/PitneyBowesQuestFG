@@ -30,7 +30,7 @@ public class AddressController : ControllerBase
 		}
 		return Ok(result);
 	}
-	[HttpGet("{city}")]//[HttpGet]
+	[HttpGet("{city}")]
 	public async Task<IActionResult> GetAllByCity(string city)
 	{
 		List<Address> result;
@@ -44,7 +44,7 @@ public class AddressController : ControllerBase
 		}
 		return Ok(result);
 	}
-	[HttpPost("{address}")]
+	[HttpPost]
 	public async Task<IActionResult> AddAddress(Address address)
 	{
 		try

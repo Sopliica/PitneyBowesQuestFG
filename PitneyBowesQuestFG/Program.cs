@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Serilog
 var logger = new LoggerConfiguration()
-	.WriteTo.Console() // moja twórczosc
+	.WriteTo.Console() 
 	.ReadFrom.Configuration(builder.Configuration)
 	.Enrich.FromLogContext()
 	.CreateLogger();
