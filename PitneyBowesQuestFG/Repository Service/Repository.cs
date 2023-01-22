@@ -25,7 +25,7 @@ public class Repository<TModel> : IRepository<TModel> where TModel : class, IEnt
 
     public virtual async Task Delete(TModel model)
     {
-////////////////////hm
+
         _set.Remove(model);
         await Save();
     }
@@ -54,7 +54,6 @@ public class Repository<TModel> : IRepository<TModel> where TModel : class, IEnt
         }
         catch (Exception)
         {
-///////////////////////hm
             throw;
         }
         return model;

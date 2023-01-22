@@ -47,15 +47,15 @@ public class AddressController : ControllerBase
 	[HttpPost]
 	public async Task<IActionResult> AddAddress(Address address)
 	{
+		Address result;
 		try
 		{
-			await _addressRepository.Create(address);
+			result = await _addressRepository.Create(address);
 		}
 		catch(Exception e)
 		{
             return BadRequest(e.Message);
         }
-		return Ok();
+		return CreatedAtAction("GetLast", new { id = result.Id });
 	}
-
 }
